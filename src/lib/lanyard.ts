@@ -70,5 +70,6 @@ export const activityQueryOptions = () =>
 		retry: 3,
 		retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
 		staleTime: 1000 * 30, // Consider data fresh for 30s
-		gcTime: 1000 * 60 * 5, // Keep in cache for 5min
+		// gcTime: 1000 * 60 * 5, // Keep in cache for 5min,
+		gcTime: 0,
 	});

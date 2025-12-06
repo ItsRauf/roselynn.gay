@@ -42,7 +42,8 @@ export const githubContributionsQueryOptions = () =>
 		staleTime: 1000 * 60 * 60,
 		retry: 3,
 		retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
-		gcTime: 1000 * 60 * 60 * 2, // Keep in cache for 2 hours
+		// gcTime: 1000 * 60 * 60 * 2, // Keep in cache for 2 hours
+		gcTime: 0,
 	});
 
 function GitHubContributionsContent() {

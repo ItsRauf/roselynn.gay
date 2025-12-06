@@ -6,24 +6,23 @@ import tailwindcss from "@tailwindcss/vite";
 import contentCollections from "@content-collections/vite";
 import { devtools } from "@tanstack/devtools-vite";
 import { nitro } from "nitro/vite";
-import takumiPackageJson from "@takumi-rs/core/package.json" with {
-  type: "json",
-};
 
 const config = defineConfig({
   ssr: {
     external: ["@takumi-rs/image-response"],
   },
   optimizeDeps: {
-    exclude: ["@takumi-rs/image-response"]
+    exclude: ["@takumi-rs/image-response"],
   },
   plugins: [
     ...(process.env.NODE_ENV !== "production" ? [devtools()] : []),
     nitro({
-      externals: {
-      external: ["@takumi-rs/core"],
-      traceInclude: Object.keys(takumiPackageJson.optionalDependencies),
-    }
+      compatibilityDate: "2024-09-19",
+      preset: "cloudflare_module",
+      cloudflare: {
+        deployConfig: true,
+        nodeCompat: true,
+      },
     }),
     // this is the plugin that enables path aliases
     viteTsConfigPaths({
@@ -38,7 +37,7 @@ const config = defineConfig({
     }),
     react({
       babel: {
-        plugins: ['babel-plugin-react-compiler'],
+        plugins: ["babel-plugin-react-compiler"],
       },
     }),
   ],

@@ -8,12 +8,6 @@ import { devtools } from "@tanstack/devtools-vite";
 import { nitro } from "nitro/vite";
 
 const config = defineConfig({
-  ssr: {
-    external: ["@takumi-rs/image-response"],
-  },
-  optimizeDeps: {
-    exclude: ["@takumi-rs/image-response"],
-  },
   plugins: [
     ...(process.env.NODE_ENV !== "production" ? [devtools()] : []),
     nitro({

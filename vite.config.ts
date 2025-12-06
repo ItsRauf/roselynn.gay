@@ -16,6 +16,10 @@ const config = defineConfig({
       cloudflare: {
         deployConfig: true,
         nodeCompat: true,
+        wrangler: {
+          workers_dev: false,
+          preview_urls: false
+        },
       },
     }),
     // this is the plugin that enables path aliases
@@ -27,6 +31,7 @@ const config = defineConfig({
     tanstackStart({
       prerender: {
         enabled: true,
+        
       },
     }),
     react({

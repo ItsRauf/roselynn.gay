@@ -1,0 +1,61 @@
+---
+name: discordtools.io
+description: Utilities for Power Users
+---
+
+<RoundedImage
+  src="/assets/projects/discordtools/hero.jpg"
+  alt="discordtools.io Homepage"
+/>
+
+# Discord power users needed better tools for managing and inspecting servers.
+
+I built discordtools.io from the ground up after noticing how scattered Discord utility tools were. Instead of jumping between bots, docs, and third-party websites, I wanted a place where power users could quickly access the information and tools they rely on. Today, it's used by thousands of people who manage and organize Discord communities every day.
+
+---
+
+## The Tools
+
+**Server Counter**  
+I created a tool that shows users exactly how many servers they're in, along with a breakdown of ownership, moderation roles, verified servers, partnered servers, and more. It uses OAuth so people can sign in securely and see insights based on their own account.
+
+<video autoPlay loop className="rounded-2xl">
+  <source
+    src="/assets/projects/discordtools/server-count.mp4"
+    type="video/mp4"
+  />
+</video>
+
+**Snowflake Decoder**  
+Every Discord object has a unique snowflake ID. This tool decodes those IDs instantly—paste one in and you’ll see what type of object it is, when it was created, and the metadata encoded in the number.
+
+<RoundedImage
+  src="/assets/projects/discordtools/snowflake.jpg"
+  alt="Discord Snowflake Parser"
+/>
+
+**Timestamp Formatting**  
+Discord’s timestamp syntax isn’t always easy to remember. I built a simple form that generates the correct formatting for you—pick the time, choose the style, and copy the result.
+
+<RoundedImage
+  src="/assets/projects/discordtools/timestamp.jpg"
+  alt="Discord Timestamp Formatting"
+/>
+
+---
+
+## The Technical Side
+
+The project is built with Nuxt.js for server-side rendering, giving the site strong SEO and fast initial loads—important when people are searching for specific Discord tools.
+
+It integrates directly with Discord’s API for live data, which required handling rate limiting, adding caching layers, and keeping responses quick even when the API slows down.
+
+The codebase is modular, with each tool living in its own component and route. That makes the platform easy to maintain and expand as new utility ideas come up.
+
+---
+
+The platform launched in June 2024 and continues to help thousands of Discord power users with server management, organization, and troubleshooting.
+
+<Button variant="outline">
+  <a href="https://discordtools.io">Visit discordtools.io →</a>
+</Button>

@@ -1,0 +1,67 @@
+---
+company: RWND Media
+role: Front-end Web Developer
+url: https://rwnd.com/
+---
+
+<RoundedImage
+  src="/assets/work/rwnd/hero.jpg"
+  alt="RWND Media Landing Page Hero"
+/>
+
+# RWND Media needed a new marketing site to showcase their services.
+
+I partnered with their design team to turn their Figma concepts into a polished, high-performance landing page. My focus was on clean implementation, smooth interactions, and making it easy for visitors to understand what RWND offers. The work ranged from building custom components to fine-tuning performance and SEO.
+
+---
+
+## Building Interactive Pieces
+
+The goal was to present a lot of information without overwhelming the visitor. To help with that, I built an accordion for their core values, giving people an easy way to browse through details at their own pace instead of being hit with a long block of text.
+
+<video autoPlay loop className="rounded-2xl">
+  <source src="/assets/work/rwnd/accordion-demo.mp4" type="video/mp4" />
+</video>
+
+For social proof, I added a partner showcase featuring the companies RWND collaborates with. It’s simple, lightweight, and instantly builds trust.
+
+<video autoPlay loop className="rounded-2xl">
+  <source src="/assets/work/rwnd/partners.mp4" type="video/mp4" />
+</video>
+
+I also built a contact form modal so visitors can easily reach out without leaving the page, then connected it directly to their backend.
+
+<RoundedImage
+  src="/assets/work/rwnd/contact-form.jpg"
+  alt="Contact Form Modal"
+/>
+
+---
+
+## The Technical Side
+
+The site is built with Astro for static generation, which means the initial load is pure HTML and CSS; Fast, SEO-friendly, and easy to maintain.
+
+The accordion was a fun technical challenge. I wanted smooth, responsive animations without depending on JavaScript for the basic open/close behavior. Using radio inputs and CSS grid transitions gave me a clean, accessible solution that performs well even on slower devices.
+
+```jsx
+// Accordion using radio inputs + CSS grid - no JS needed for open/close
+<div class="info-card grid grid-rows-[max-content_0fr] has-checked:grid-rows-[max-content_1fr]">
+  <input type="radio" name="infocards" class="opacity-0 z-10" />
+  <div class="col-start-1 row-start-1">
+    <p>{card.title}</p>
+    <Icon name="add" class="group-has-checked:rotate-45" />
+  </div>
+  <div class="col-start-1 row-start-2 opacity-0 group-has-checked:opacity-100">
+    <p>{card.content}</p>
+  </div>
+</div>
+```
+
+---
+
+The site launched in May 2025 — a clean, fast marketing page that communicates RWND's capabilities and reflects their brand.
+
+<Button variant="outline">
+  <a href="https://rwnd.com/">View Live Site →</a>
+</Button>

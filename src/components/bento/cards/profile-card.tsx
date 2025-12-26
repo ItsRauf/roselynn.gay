@@ -26,8 +26,6 @@ export const ProfileCard = memo(function ProfileCard() {
 				</div>
 				<CardDescription className="text-center">
 					{siteConfig.personal.tagline}
-					<br />
-					{siteConfig.personal.description}
 				</CardDescription>
 			</CardContent>
 		</GlowCard>

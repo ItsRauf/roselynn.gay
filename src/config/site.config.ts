@@ -72,7 +72,7 @@ export const siteConfig: SiteConfig = {
 		displayName: "roselyn",
 		pronouns: "she/her",
 		tagline: "creative by nature, creator by choice",
-		description: "developer, designer, dreamer building things that spark joy",
+		description: "developer, designer, dreamer; building things that spark joy",
 		avatarUrl: "https://avatars.githubusercontent.com/u/31735267?v=4",
 		githubUserId: "31735267",
 	},

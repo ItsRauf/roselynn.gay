@@ -10,18 +10,31 @@ import { throttle } from "@/lib/utils";
 
 type MousePosition = { x: number; y: number } | null;
 
+type MousePositionControls = {
+	position: MousePosition;
+	setPosition: (pos: MousePosition) => void;
+	isLocked: boolean;
+	setIsLocked: (locked: boolean) => void;
+};
+
 const MousePositionContext = createContext<MousePosition>(null);
+const MousePositionControlsContext =
+	createContext<MousePositionControls | null>(null);
 
 export function useMousePosition() {
 	return useContext(MousePositionContext);
 }
 
+export function useMousePositionControls() {
+	return useContext(MousePositionControlsContext);
+}
+
 export function MousePositionProvider({ children }: PropsWithChildren) {
 	const [mousePos, setMousePos] = useState<MousePosition>(null);
 	const [isReducedMotion, setIsReducedMotion] = useState(false);
+	const [isLocked, setIsLocked] = useState(false);
 
 	useEffect(() => {
-		// Check for prefers-reduced-motion preference
 		const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 		setIsReducedMotion(mediaQuery.matches);
 
@@ -29,7 +42,6 @@ export function MousePositionProvider({ children }: PropsWithChildren) {
 			setIsReducedMotion(e.matches);
 		mediaQuery.addEventListener("change", handleChange);
 
-		// Initialize mouse position to center of screen
 		setMousePos({
 			x: window.innerWidth / 2,
 			y: -50 + window.innerHeight / 2,
@@ -38,20 +50,35 @@ export function MousePositionProvider({ children }: PropsWithChildren) {
 		return () => mediaQuery.removeEventListener("change", handleChange);
 	}, []);
 
-	// Throttle mouse updates to 60fps (16ms) instead of firing on every mouse move event
 	const handleMouseMove = useMemo(
 		() =>
 			throttle((e: React.MouseEvent) => {
-				if (!isReducedMotion) {
+				if (!isReducedMotion && !isLocked) {
+					const target = e.target as HTMLElement;
+					if (target.closest("[data-ignore-mouse-tracking]")) {
+						return;
+					}
 					setMousePos({ x: e.clientX, y: e.clientY });
 				}
 			}, 16),
-		[isReducedMotion],
+		[isReducedMotion, isLocked],
 	);
 
 	const handleMouseLeave = () => {
-		setMousePos(null);
+		if (!isLocked) {
+			setMousePos(null);
+		}
 	};
+
+	const controls = useMemo(
+		() => ({
+			position: mousePos,
+			setPosition: setMousePos,
+			isLocked,
+			setIsLocked,
+		}),
+		[mousePos, isLocked],
+	);
 
 	return (
 		// biome-ignore lint/a11y/noStaticElementInteractions: wrapper div needed for mouse tracking context
@@ -61,9 +88,11 @@ export function MousePositionProvider({ children }: PropsWithChildren) {
 			onMouseLeave={handleMouseLeave}
 			role="presentation"
 		>
-			<MousePositionContext.Provider value={mousePos}>
-				{children}
-			</MousePositionContext.Provider>
+			<MousePositionControlsContext.Provider value={controls}>
+				<MousePositionContext.Provider value={mousePos}>
+					{children}
+				</MousePositionContext.Provider>
+			</MousePositionControlsContext.Provider>
 		</div>
 	);
 }

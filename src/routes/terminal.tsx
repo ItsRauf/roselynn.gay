@@ -9,7 +9,7 @@ export const Route = createFileRoute("/terminal")({
 
 function Terminal() {
 	return (
-		<main className="h-screen bg-neutral-950 grid place-items-center-safe p-8">
+		<main className="h-screen bg-neutral-950 grid place-items-center-safe p-2 sm:p-4 md:p-8">
 			<TerminalWindow>
 				<CRTEffect>
 					<TerminalTextDisplay />

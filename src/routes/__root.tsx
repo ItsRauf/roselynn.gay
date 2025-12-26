@@ -8,9 +8,12 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import starryNightCss from "@wooorm/starry-night/style/both?url";
+import { MousePositionProvider } from "@/components/bento/mouse-position-context";
 import { ErrorBoundary } from "@/components/error-boundary";
+import { MousePositionDevtools } from "@/components/mouse-position-devtools";
 import { NotFound } from "@/components/not-found";
 import { ThemeProvider } from "@/components/theme-provider";
+import { siteConfig } from "@/config";
 import appCss from "../styles.css?url";
 
 export const Route = createRootRouteWithContext<{
@@ -26,14 +29,12 @@ export const Route = createRootRouteWithContext<{
 				content: "width=device-width, initial-scale=1",
 			},
 			{
-				title: "roselyn - creative by nature, creator by choice",
+				title: `${siteConfig.personal.name} - ${siteConfig.personal.tagline}`,
 			},
 			{
 				name: "description",
-				content:
-					"Portfolio of roselyn - developer, designer, dreamer building things that spark joy",
+				content: siteConfig.personal.tagline,
 			},
-			// Open Graph meta tags
 			{
 				property: "og:type",
 				content: "website",
@@ -44,33 +45,63 @@ export const Route = createRootRouteWithContext<{
 			},
 			{
 				property: "og:title",
-				content: "roselyn - creative by nature, creator by choice",
+				content: siteConfig.personal.name,
 			},
 			{
 				property: "og:description",
-				content:
-					"Portfolio of roselyn - developer, designer, dreamer building things that spark joy",
+				content: siteConfig.personal.tagline,
 			},
 			{
 				property: "og:url",
 				content: "https://roselynn.gay",
 			},
-			// Twitter Card meta tags
+			{
+				property: "og:image",
+				content: "https://roselynn.gay/og-image.png",
+			},
+			{
+				property: "og:image:alt",
+				content: `Profile card for ${siteConfig.personal.name} showing name, pronouns, and tagline on a dark background with glow effect`,
+			},
+			{
+				property: "og:image:width",
+				content: "1200",
+			},
+			{
+				property: "og:image:height",
+				content: "630",
+			},
+			{
+				property: "og:image:type",
+				content: "image/png",
+			},
 			{
 				name: "twitter:card",
-				content: "summary",
+				content: "summary_large_image",
 			},
 			{
 				name: "twitter:site",
-				content: "@roseratops",
+				content: `@${siteConfig.social.twitter}`,
 			},
 			{
 				name: "twitter:title",
-				content: "roselyn - Portfolio",
+				content: siteConfig.personal.name,
 			},
 			{
 				name: "twitter:description",
-				content: "creative by nature, creator by choice",
+				content: siteConfig.personal.tagline,
+			},
+			{
+				name: "twitter:url",
+				content: "https://roselynn.gay",
+			},
+			{
+				name: "twitter:image",
+				content: "https://roselynn.gay/og-image.png",
+			},
+			{
+				name: "twitter:image:alt",
+				content: `Profile card for ${siteConfig.personal.name} showing name, pronouns, and tagline on a dark background with glow effect`,
 			},
 		],
 		links: [
@@ -102,25 +133,31 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			</head>
 			<body>
 				<ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-					{children}
+					<MousePositionProvider>
+						{children}
+						{import.meta.env.DEV && (
+							<TanStackDevtools
+								config={{
+									position: "bottom-right",
+								}}
+								plugins={[
+									{
+										name: "Tanstack Router",
+										render: <TanStackRouterDevtoolsPanel />,
+									},
+									{
+										name: "Tanstack Query",
+										render: <ReactQueryDevtoolsPanel />,
+									},
+									{
+										name: "Mouse Position",
+										render: <MousePositionDevtools />,
+									},
+								]}
+							/>
+						)}
+					</MousePositionProvider>
 				</ThemeProvider>
-				{import.meta.env.DEV && (
-					<TanStackDevtools
-						config={{
-							position: "bottom-right",
-						}}
-						plugins={[
-							{
-								name: "Tanstack Router",
-								render: <TanStackRouterDevtoolsPanel />,
-							},
-							{
-								name: "Tanstack Query",
-								render: <ReactQueryDevtoolsPanel />,
-							},
-						]}
-					/>
-				)}
 				<Scripts />
 			</body>
 		</html>

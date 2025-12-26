@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import {
 	GitHubContributionsCard,
 	LocationCard,
-	MousePositionProvider,
 	NowPlayingCard,
 	ProfileCard,
 	ProjectsCard,
@@ -28,7 +27,7 @@ export const Route = createFileRoute("/")({
 	preload: true,
 	wrapInSuspense: true,
 	pendingComponent: () => (
-		<div className="relative min-h-screen bg-background p-4 md:p-8 flex items-center justify-center overflow-hidden">
+		<div className="relative min-h-screen bg-background p-2 sm:p-4 md:p-8 flex items-center justify-center overflow-hidden">
 			<GridBackground />
 		</div>
 	),
@@ -74,38 +73,31 @@ const CONTACT_LINKS = [
 
 function Index() {
 	return (
-		<div className="relative min-h-screen bg-background p-4 md:p-8 flex items-center justify-center overflow-hidden">
+		<div className="relative min-h-screen bg-background p-2 sm:p-4 md:p-8 flex items-center justify-center overflow-hidden">
 			<GridBackground />
-			<MousePositionProvider>
-				<div className="w-full max-w-6xl py-4 sm:py-8 px-4 sm:px-8 md:px-16 lg:px-32">
-					<div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2 sm:gap-3 auto-rows-[minmax(70px,auto)]">
-						{/* Row 1-2: Profile (2x2) + Status (2) + Now Playing (2) */}
-						<ProfileCard />
-						<StatusCard />
-						<NowPlayingCard />
+			<div className="w-full max-w-6xl py-2 sm:py-4 md:py-8 px-2 sm:px-4 md:px-8 lg:px-16">
+				<div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2 sm:gap-3 auto-rows-[minmax(100px,auto)]">
+					<ProfileCard />
+					<StatusCard />
+					<NowPlayingCard />
 
-						{/* Row 2: Profile continues + 4 social cards (1 each) */}
-						{SOCIAL_LINKS.map((link) => (
-							<SocialCard key={link.label} {...link} />
-						))}
-						{CONTACT_LINKS.map((link) => (
-							<SocialCard key={link.label} {...link} />
-						))}
+					{SOCIAL_LINKS.map((link) => (
+						<SocialCard key={link.label} {...link} />
+					))}
+					{CONTACT_LINKS.map((link) => (
+						<SocialCard key={link.label} {...link} />
+					))}
 
-						{/* Row 3: Tech (2) + Location (2) + Terminal (2) */}
-						<TechStackCard />
-						<LocationCard />
-						<TerminalCard />
+					<TechStackCard />
+					<LocationCard />
+					<TerminalCard />
 
-						{/* Row 4: Projects (3) + Work (3) */}
-						<ProjectsCard />
-						<WorkCard />
+					<ProjectsCard />
+					<WorkCard />
 
-						{/* Row 5: GitHub full width (6) */}
-						<GitHubContributionsCard />
-					</div>
+					<GitHubContributionsCard />
 				</div>
-			</MousePositionProvider>
+			</div>
 		</div>
 	);
 }

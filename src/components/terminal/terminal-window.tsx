@@ -5,8 +5,8 @@ import type { PropsWithChildren } from "react";
 export function TerminalWindow({ children }: PropsWithChildren) {
 	return (
 		<div className="h-2/3 max-w-4xl w-full rounded-xl grid grid-cols-1 grid-rows-[auto_1fr] overflow-hidden shadow-xl shadow-amber-700/10 bg-neutral-900/80 border border-white/10 backdrop-blur-xl ring-1 ring-white/5">
-			<header className="row-start-1 grid grid-cols-3 gap-2 px-4 py-3 items-center bg-neutral-900">
-				<div className="flex gap-2 w-min group">
+			<header className="row-start-1 grid grid-cols-3 gap-2 px-2 sm:px-4 py-2 sm:py-3 items-center bg-neutral-900">
+				<div className="flex gap-1.5 sm:gap-2 w-min group">
 					<Link
 						to="/"
 						className="size-4 grid place-items-center-safe rounded-full bg-red-500 hover:bg-red-600 transition-colors"
@@ -29,7 +29,7 @@ export function TerminalWindow({ children }: PropsWithChildren) {
 						/>
 					</span>
 				</div>
-				<span className="text-center text-neutral-400 text-sm">
+				<span className="text-center text-neutral-400 text-xs sm:text-sm">
 					roselyn@portfolio ~
 				</span>
 			</header>

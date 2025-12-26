@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TerminalRouteImport } from './routes/terminal'
+import { Route as OgImageRouteImport } from './routes/og-image'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as WorkSlugRouteImport } from './routes/work/$slug'
 import { Route as ProjectsChar123SlugChar125RouteImport } from './routes/projects/{-$slug}'
@@ -17,6 +18,11 @@ import { Route as ProjectsChar123SlugChar125RouteImport } from './routes/project
 const TerminalRoute = TerminalRouteImport.update({
   id: '/terminal',
   path: '/terminal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OgImageRoute = OgImageRouteImport.update({
+  id: '/og-image',
+  path: '/og-image',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -38,12 +44,14 @@ const ProjectsChar123SlugChar125Route =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/og-image': typeof OgImageRoute
   '/terminal': typeof TerminalRoute
   '/projects/{-$slug}': typeof ProjectsChar123SlugChar125Route
   '/work/$slug': typeof WorkSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/og-image': typeof OgImageRoute
   '/terminal': typeof TerminalRoute
   '/projects/{-$slug}': typeof ProjectsChar123SlugChar125Route
   '/work/$slug': typeof WorkSlugRoute
@@ -51,20 +59,33 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/og-image': typeof OgImageRoute
   '/terminal': typeof TerminalRoute
   '/projects/{-$slug}': typeof ProjectsChar123SlugChar125Route
   '/work/$slug': typeof WorkSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/terminal' | '/projects/{-$slug}' | '/work/$slug'
+  fullPaths:
+    | '/'
+    | '/og-image'
+    | '/terminal'
+    | '/projects/{-$slug}'
+    | '/work/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/terminal' | '/projects/{-$slug}' | '/work/$slug'
-  id: '__root__' | '/' | '/terminal' | '/projects/{-$slug}' | '/work/$slug'
+  to: '/' | '/og-image' | '/terminal' | '/projects/{-$slug}' | '/work/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/og-image'
+    | '/terminal'
+    | '/projects/{-$slug}'
+    | '/work/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  OgImageRoute: typeof OgImageRoute
   TerminalRoute: typeof TerminalRoute
   ProjectsChar123SlugChar125Route: typeof ProjectsChar123SlugChar125Route
   WorkSlugRoute: typeof WorkSlugRoute
@@ -77,6 +98,13 @@ declare module '@tanstack/react-router' {
       path: '/terminal'
       fullPath: '/terminal'
       preLoaderRoute: typeof TerminalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/og-image': {
+      id: '/og-image'
+      path: '/og-image'
+      fullPath: '/og-image'
+      preLoaderRoute: typeof OgImageRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -105,6 +133,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  OgImageRoute: OgImageRoute,
   TerminalRoute: TerminalRoute,
   ProjectsChar123SlugChar125Route: ProjectsChar123SlugChar125Route,
   WorkSlugRoute: WorkSlugRoute,

@@ -38,10 +38,10 @@ Embedly monitors messages in Discord servers where it's installed. When someone 
 The bot supports multiple platforms including Twitter/X, TikTok, and Instagram. Each platform required understanding their URL structure and either using their API or finding reliable embed services to pull the full content.
 
 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-  <video autoPlay loop controls className="rounded-2xl">
+  <video autoPlay loop controls playsInline className="rounded-2xl">
     <source src="/assets/projects/embedly/context-menu.mp4" type="video/mp4" />
   </video>
-  <video autoPlay loop controls className="rounded-2xl">
+  <video autoPlay loop controls playsInline className="rounded-2xl">
     <source src="/assets/projects/embedly/slash-command.mp4" type="video/mp4" />
   </video>
 </div>
@@ -57,7 +57,7 @@ The embed system uses Discord's new components v2 API to create rich, interactiv
 ```ts
 // Building a Twitter reply embed with parent context
 const container = new ContainerBuilder().setAccentColor(
-  EmbedlyPlatformColors.Twitter
+  EmbedlyPlatformColors.Twitter,
 );
 
 // Show parent tweet first
@@ -66,14 +66,14 @@ const parentSection = createAuthorSection(
   embed.replying_to.username,
   embed.replying_to.profile_url,
   embed.replying_to.avatar_url,
-  embed.replying_to.description
+  embed.replying_to.description,
 );
 
 container.addSectionComponents(parentSection);
 
 // Add separator
 container.addSeparatorComponents((builder) =>
-  builder.setDivider(true).setSpacing(SeparatorSpacingSize.Large)
+  builder.setDivider(true).setSpacing(SeparatorSpacingSize.Large),
 );
 
 // Show the actual reply
@@ -83,7 +83,7 @@ const replySection = createAuthorSection(
   embed.profile_url,
   embed.avatar_url,
   embed.description,
-  emojis.reply
+  emojis.reply,
 );
 
 container.addSectionComponents(replySection);
@@ -127,7 +127,7 @@ if (tweet_data.replying_to_status) {
           url: media.url,
         },
         description: media.altText,
-      }))
+      })),
     );
   }
   embed.setReplyingTo(reply_embed);

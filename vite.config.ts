@@ -30,6 +30,7 @@ export default defineConfig({
 		tanstackStart({
 			prerender: {
 				enabled: true,
+				failOnError: false,
 			},
 		}),
 		react({

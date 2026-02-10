@@ -62,7 +62,7 @@ const CONTACT_LINKS = [
 		glowColor: siteConfig.theme.colors.glow.pink,
 	},
 	{
-		href: "/resume.pdf",
+		href: "/resume",
 		icon: "ph:file-text-duotone",
 		label: "Resume",
 		color: "text-amber-500",

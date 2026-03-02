@@ -86,8 +86,8 @@ export const siteConfig: SiteConfig = {
 		city: "San Francisco, CA",
 		timezone: "America/Los_Angeles",
 		coordinates: {
-			lat: 37.7749,
-			lng: -122.4194,
+			lat: 37.8199,
+			lng: -122.4783,
 		},
 	},
 	theme: {

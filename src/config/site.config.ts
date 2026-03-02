@@ -83,11 +83,11 @@ export const siteConfig: SiteConfig = {
 		discordUserId: "172557961133162496",
 	},
 	location: {
-		city: "Chicago, IL",
-		timezone: "America/Chicago",
+		city: "San Francisco, CA",
+		timezone: "America/Los_Angeles",
 		coordinates: {
-			lat: 41.8819,
-			lng: -87.627,
+			lat: 37.7749,
+			lng: -122.4194,
 		},
 	},
 	theme: {

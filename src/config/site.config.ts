@@ -77,7 +77,7 @@ export const siteConfig: SiteConfig = {
 		githubUserId: "31735267",
 	},
 	social: {
-		github: "ItsRauf",
+		github: "rosethornbush",
 		twitter: "roseratops",
 		email: "rose@roselynn.gay",
 		discordUserId: "172557961133162496",
